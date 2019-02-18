@@ -2,15 +2,15 @@ const { expect } = require('chai');
 const Driver = require('../lib/Driver');
 
 describe('Driver', function () {
+    beforeEach(function () {
+        this.driver = new Driver('Driver Dan');
+    });
+
     it('is a function', function () {
         expect(Driver).to.be.a('function');
     });
 
     context('#constructor', function () {
-        beforeEach(function () {
-            this.driver = new Driver('Driver Dan');
-        });
-
         it('is a function', function () {
             expect(Driver.prototype.constructor).to.be.a('function');
         });
@@ -37,6 +37,20 @@ describe('Driver', function () {
 
         it('caches the TypeError and returns null when passed an invalid record', function () {
             expect(Driver.factory('Invalid!')).to.equal(null);
+        });
+    });
+
+    context('#toString', function () {
+        it('is a function', function () {
+            expect(Driver.prototype.toString).to.be.a('function');
+        });
+
+        it('returns a string', function () {
+            expect(this.driver.toString()).to.be.a('string');
+        });
+
+        it('generates a report for a driver with no miles travelled', function () {
+            expect(this.driver.toString()).to.equal('Dan: 0 miles');
         });
     });
 });
