@@ -7,6 +7,9 @@ module.exports = {
         node: true
     },
     extends: 'eslint:recommended',
+    parserOptions: {
+        ecmaVersion: 9 // Same as the now deprecated 2018 option, see https://eslint.org/docs/user-guide/configuring#deprecated
+    },
     root: true,
     rules: {
         'arrow-spacing': 'error',
