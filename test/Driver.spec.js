@@ -19,6 +19,10 @@ describe('Driver', function () {
             expect(this.driver.name).to.equal('Dan');
         });
 
+        it('sets the trips property to an empty array', function () {
+            expect(this.driver.trips).to.eql([]);
+        });
+
         it('throws a TypeError if not instantiated with a valid record', function () {
             const invalidInit = () => new Driver('Hello type error!');
 
@@ -35,8 +39,28 @@ describe('Driver', function () {
             expect(Driver.factory('Driver Dan')).to.be.an.instanceof(Driver);
         });
 
-        it('caches the TypeError and returns null when passed an invalid record', function () {
+        it('catches the TypeError and returns null when passed an invalid record', function () {
             expect(Driver.factory('Invalid!')).to.equal(null);
+        });
+    });
+
+    context('#addTrip', function () {
+        it('is a function', function () {
+            expect(Driver.prototype.addTrip).to.be.a('function');
+        });
+
+        it('adds a trip for the driver', function () {
+            const tripFixture = { name: this.driver.name };
+
+            this.driver.addTrip(tripFixture);
+            expect(this.driver.trips).to.eql([tripFixture]);
+        });
+
+        it('throws a TypeError if not passed a trip object for the driver', function () {
+            const tripFixture = { name: 'Totally Not Dan' };
+            const invalidCall = () => this.driver.addTrip(tripFixture);
+
+            expect(invalidCall).to.throw(TypeError);
         });
     });
 
