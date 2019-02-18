@@ -36,21 +36,21 @@ describe('Trip', function () {
         });
     });
 
-    context('#getDurationInMinutes', function () {
+    context('#getDuration', function () {
         it('is a function', function () {
-            expect(Trip.prototype.getDurationInMinutes).to.be.a('function');
+            expect(Trip.prototype.getDuration).to.be.a('function');
         });
 
         it('returns a number', function () {
             const trip = new Trip('Trip Dan 07:15 07:45 17.3');
-            const duration = trip.getDurationInMinutes();
+            const duration = trip.getDuration();
 
             expect(duration).to.be.a('number');
         });
 
         it('returns 60 for an hour long trip', () => {
             const trip = new Trip('Trip Dan 05:55 06:55 55.5');
-            const duration = trip.getDurationInMinutes();
+            const duration = trip.getDuration();
 
             expect(duration).to.equal(60);
         });
