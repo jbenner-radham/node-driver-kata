@@ -2,8 +2,54 @@ const { expect } = require('chai');
 const Trip = require('../lib/Trip');
 
 describe('Trip', function () {
+    beforeEach(function () {
+        this.trip = new Trip('Trip Dan 07:15 07:45 17.3');
+    });
+
     it('is a function', function () {
         expect(Trip).to.be.a('function');
+    });
+
+    context('#constructor', function () {
+        it('is a function', function () {
+            expect(Trip.prototype.constructor).to.be.a('function');
+        });
+
+        it('sets the name property', function () {
+            expect(this.trip.name).to.equal('Dan');
+        });
+
+        it('sets the start property', function () {
+            const date = new Date(0);
+
+            date.setUTCHours(7);
+            date.setUTCMinutes(15);
+
+            expect(this.trip.start.toISOString()).to.equal(date.toISOString());
+        });
+
+        it('sets the end property', function () {
+            const date = new Date(0);
+
+            date.setUTCHours(7);
+            date.setUTCMinutes(45);
+
+            expect(this.trip.end.toISOString()).to.equal(date.toISOString());
+        });
+
+        it('sets the duration property', function () {
+            expect(this.trip.duration).to.equal(30);
+        });
+
+        it('sets the miles property', function () {
+            expect(this.trip.miles).to.equal(17.3);
+        });
+
+        it('throws a TypeError if not instantiated with a valid record', function () {
+            const invalidInit = () => new Trip('Hello type error!');
+
+            expect(invalidInit).to.throw(TypeError);
+        });
     });
 
     context('.parseTime', function () {
