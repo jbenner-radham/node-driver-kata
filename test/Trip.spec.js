@@ -52,6 +52,20 @@ describe('Trip', function () {
         });
     });
 
+    context('.factory', function () {
+        it('is a function', function () {
+            expect(Trip.factory).to.be.a('function');
+        });
+
+        it('returns a new class instance', function () {
+            expect(Trip.factory('Trip Dan 07:15 07:45 17.3')).to.be.an.instanceof(Trip);
+        });
+
+        it('caches the TypeError and returns null when passed an invalid record', function () {
+            expect(Trip.factory('Invalid!')).to.equal(null);
+        });
+    });
+
     context('.parseTime', function () {
         it('is a function', function () {
             expect(Trip.parseTime).to.be.a('function');
