@@ -44,6 +44,24 @@ describe('Driver', function () {
         });
     });
 
+    context('#setAverageSpeed', function () {
+        it('is a function', function () {
+            expect(Driver.prototype.setAverageSpeed).to.be.a('function');
+        });
+
+        it('sets the average speed of the driver', function () {
+            const tripFixture = {
+                duration: 60,
+                miles: 60,
+                name: this.driver.name
+            };
+
+            this.driver.addTrip(tripFixture);
+            this.driver.setAverageSpeed();
+            expect(this.driver.averageSpeed).to.equal(60);
+        });
+    });
+
     context('#addTrip', function () {
         it('is a function', function () {
             expect(Driver.prototype.addTrip).to.be.a('function');
