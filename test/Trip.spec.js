@@ -66,6 +66,46 @@ describe('Trip', function () {
         });
     });
 
+    context('#isReported', function () {
+        it('is a function', function () {
+            expect(Trip.prototype.isReported).to.be.a('function');
+        });
+
+        it('returns a boolean', function () {
+            expect(this.trip.isReported()).to.be.a('boolean');
+        });
+
+        it('returns false for a trip with an average speed of 4.9 mph', function () {
+            const trip = new Trip('Trip Dan 07:15 08:15 4.9');
+
+            expect(trip.isReported()).to.equal(false);
+        });
+
+        it('returns true for a trip with an average speed of 5 mph', function () {
+            const trip = new Trip('Trip Dan 07:15 08:15 5.0');
+
+            expect(trip.isReported()).to.equal(true);
+        });
+
+        it('returns true for a trip with an average speed of 60 mph', function () {
+            const trip = new Trip('Trip Dan 07:15 08:15 60.0');
+
+            expect(trip.isReported()).to.equal(true);
+        });
+
+        it('returns true for a trip with an average speed of 99.9 mph', function () {
+            const trip = new Trip('Trip Dan 07:15 08:15 99.9');
+
+            expect(trip.isReported()).to.equal(true);
+        });
+
+        it('returns false for a trip with an average speed of 100 mph', function () {
+            const trip = new Trip('Trip Dan 07:15 08:15 100.0');
+
+            expect(trip.isReported()).to.equal(false);
+        });
+    });
+
     context('.parseTime', function () {
         it('is a function', function () {
             expect(Trip.parseTime).to.be.a('function');
