@@ -19,4 +19,20 @@ describe('Report', function () {
             expect(this.report.drivers).to.be.an('array').with.a.lengthOf(0);
         });
     });
+
+    context('#addDriver', function () {
+        beforeEach(function () {
+            this.driverFixture = { name: 'Jane' };
+        });
+
+        it('is a function', function () {
+            expect(Report.prototype.addDriver).to.be.a('function');
+        });
+
+        it('adds a driver the drivers array property', function () {
+            this.report.addDriver(this.driverFixture);
+
+            expect(this.report.drivers).to.eql([this.driverFixture]);
+        });
+    });
 });
