@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "author": "James Benner <james.benner@gmail.com> (http://www.jamesbenner.com/)",
-  "main": "bin/cli.js",
+  "main": "lib/index.js",
   "bin": {
     "driver-kata": "cli.js"
   },
