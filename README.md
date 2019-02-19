@@ -1,17 +1,13 @@
 driver-kata
 ===========
-[![npm](https://img.shields.io/npm/v/driver-kata.svg?)](https://www.npmjs.com/package/driver-kata)
-[![node](https://img.shields.io/node/v/driver-kata.svg?)](https://nodejs.org/)
-[![build](https://img.shields.io/travis/jbenner-radham/node-driver-kata.svg?)](https://travis-ci.org/jbenner-radham/node-driver-kata)
-[![license](https://img.shields.io/github/license/jbenner-radham/node-driver-kata.svg?)](LICENSE)
+[![build](https://img.shields.io/travis/jbenner-radham/node-driver-kata.svg?style=flat-square)](https://travis-ci.org/jbenner-radham/node-driver-kata)
+[![license](https://img.shields.io/github/license/jbenner-radham/node-driver-kata.svg?style=flat-square)](LICENSE)
 
 A code kata exercise.
 
 ~~Install~~
 -----------
-```sh
-$ yarn add driver-kata # Or alternatively: `npm install driver-kata`
-```
+~~`$ yarn add driver-kata # Or alternatively: `npm install driver-kata``~~
 
 Testing
 -------
