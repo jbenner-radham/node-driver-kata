@@ -72,10 +72,8 @@ describe('Driver', function () {
         });
 
         it('adds a trip for the driver', function () {
-            const tripFixture = { name: this.driver.name };
-
-            this.driver.addTrip(tripFixture);
-            expect(this.driver.trips).to.eql([tripFixture]);
+            this.driver.addTrip(this.tripFixture);
+            expect(this.driver.trips).to.eql([this.tripFixture]);
         });
 
         it('updates the average speed of the driver', function () {
@@ -91,6 +89,46 @@ describe('Driver', function () {
         it('throws a TypeError if not passed a trip object for the driver', function () {
             const tripFixture = { name: 'Totally Not Dan' };
             const invalidCall = () => this.driver.addTrip(tripFixture);
+
+            expect(invalidCall).to.throw(TypeError);
+        });
+    });
+
+    context('#addTrips', function () {
+        beforeEach(function () {
+            this.tripsFixture = [{
+                duration: 1,
+                miles: 60,
+                name: this.driver.name
+            }, {
+                duration: .5,
+                miles: 10,
+                name: this.driver.name
+            }];
+        });
+
+        it('is a function', function () {
+            expect(Driver.prototype.addTrips).to.be.a('function');
+        });
+
+        it('adds trips for the driver', function () {
+            this.driver.addTrips(this.tripsFixture);
+            expect(this.driver.trips).to.eql(this.tripsFixture);
+        });
+
+        it('updates the average speed of the driver', function () {
+            this.driver.addTrips(this.tripsFixture);
+            expect(this.driver.averageSpeed).to.equal(this.driver.getAverageSpeed());
+        });
+
+        it('updates the miles driven by the driver', function () {
+            this.driver.addTrips(this.tripsFixture);
+            expect(this.driver.milesDriven).to.equal(70);
+        });
+
+        it('throws a TypeError if not passed trip objects for the driver', function () {
+            const tripsFixture = [{ name: 'Totally Not Dan' }];
+            const invalidCall = () => this.driver.addTrips(tripsFixture);
 
             expect(invalidCall).to.throw(TypeError);
         });
