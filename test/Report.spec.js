@@ -1,10 +1,28 @@
 const { expect } = require('chai');
+const os = require('os');
 const Driver = require('../lib/Driver');
 const Report = require('../lib/Report');
 const Trip = require('../lib/Trip');
 
 describe('Report', function () {
     beforeEach(function () {
+        const getDriversFixture = () => {
+            const alex = new Driver('Driver Alex');
+            const bob = new Driver('Driver Bob');
+            const dan = new Driver('Driver Dan');
+
+            alex.addTrips([
+                new Trip('Trip Alex 12:01 13:16 42.0')
+            ]);
+            dan.addTrips([
+                new Trip('Trip Dan 07:15 07:45 17.3'),
+                new Trip('Trip Dan 06:12 06:32 21.8')
+            ]);
+
+            return [alex, bob, dan];
+        };
+
+        this.driversFixture = getDriversFixture();
         this.report = new Report();
     });
 
@@ -67,26 +85,35 @@ describe('Report', function () {
         });
 
         it('returns an array of the formatted reports', function () {
-            const alex = new Driver('Driver Alex');
-            const bob = new Driver('Driver Bob');
-            const dan = new Driver('Driver Dan');
-            const alexsTrips = [
-                new Trip('Trip Alex 12:01 13:16 42.0')
-            ];
-            const dansTrips = [
-                new Trip('Trip Dan 07:15 07:45 17.3'),
-                new Trip('Trip Dan 06:12 06:32 21.8')
-            ];
             const expected = [
                 'Alex: 42 miles @ 34 mph',
                 'Bob: 0 miles',
                 'Dan: 39 miles @ 47 mph'
             ];
 
-            alex.addTrips(alexsTrips);
-            dan.addTrips(dansTrips);
-            this.report.addDrivers([alex, bob, dan]);
+            this.report.addDrivers(this.driversFixture);
             expect(this.report.toArray()).to.eql(expected);
+        });
+    });
+
+    context('#toString', function () {
+        it('is a function', function () {
+            expect(Report.prototype.toString).to.be.a('function');
+        });
+
+        it('returns a string', function () {
+            expect(this.report.toString()).to.be.a('string');
+        });
+
+        it('returns a string of the formatted reports', function () {
+            const expected = [
+                'Alex: 42 miles @ 34 mph',
+                'Bob: 0 miles',
+                'Dan: 39 miles @ 47 mph'
+            ].join(os.EOL);
+
+            this.report.addDrivers(this.driversFixture);
+            expect(this.report.toString()).to.equal(expected);
         });
     });
 });
