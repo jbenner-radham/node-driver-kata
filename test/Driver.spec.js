@@ -44,7 +44,29 @@ describe('Driver', function () {
         });
     });
 
+    context('#getAverageSpeed', function () {
+        it('is a function', function () {
+            expect(Driver.prototype.getAverageSpeed).to.be.a('function');
+        });
+
+        it('returns the average miles per hour of the driver', function () {
+            expect(this.driver.getAverageSpeed()).to.equal(0);
+        });
+
+        it('returns a number', function () {
+            expect(this.driver.getAverageSpeed()).to.be.a('number');
+        });
+    });
+
     context('#addTrip', function () {
+        beforeEach(function () {
+            this.tripFixture = {
+                duration: 1,
+                miles: 60,
+                name: this.driver.name
+            };
+        });
+
         it('is a function', function () {
             expect(Driver.prototype.addTrip).to.be.a('function');
         });
@@ -56,15 +78,14 @@ describe('Driver', function () {
             expect(this.driver.trips).to.eql([tripFixture]);
         });
 
-        it('sets the average speed of the driver', function () {
-            const tripFixture = {
-                duration: 1,
-                miles: 60,
-                name: this.driver.name
-            };
-
-            this.driver.addTrip(tripFixture);
+        it('updates the average speed of the driver', function () {
+            this.driver.addTrip(this.tripFixture);
             expect(this.driver.averageSpeed).to.equal(60);
+        });
+
+        it('updates the miles driven by the driver', function () {
+            this.driver.addTrip(this.tripFixture);
+            expect(this.driver.milesDriven).to.equal(this.tripFixture.miles);
         });
 
         it('throws a TypeError if not passed a trip object for the driver', function () {
@@ -84,7 +105,7 @@ describe('Driver', function () {
             expect(this.driver.toString()).to.be.a('string');
         });
 
-        it('generates a report for a driver with no miles travelled', function () {
+        it('generates a report for a driver with no miles traveled', function () {
             expect(this.driver.toString()).to.equal('Dan: 0 miles');
         });
     });

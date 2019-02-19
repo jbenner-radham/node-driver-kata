@@ -66,7 +66,26 @@ Bob: 0 miles
 
 
 const data = file.split(newlineRegex).map(trim).filter(isNotEmptyStr);
-const drivers = unique(data.map(Driver.factory).filter(isNotNull).map(getName));
+const drivers = unique(data.map(Driver.factory).filter(isNotNull).map(getName)); // eslint-disable-line no-unused-vars
 const trips = data.map(Trip.factory).filter(isNotNull);
+const alex = new Driver('Driver Alex');
+const bob = new Driver('Driver Bob');
+const dan = new Driver('Driver Dan');
 
-console.log(data, drivers, trips);
+trips.filter(trip => trip.name === 'Alex').forEach(trip => alex.addTrip(trip));
+trips.filter(trip => trip.name === 'Bob').forEach(trip => bob.addTrip(trip));
+trips.filter(trip => trip.name === 'Dan').forEach(trip => dan.addTrip(trip));
+
+console.log(`
+Expected output:
+
+Alex: 42 miles @ 34 mph
+Bob: 0 miles
+Dan: 39 miles @ 47 mph
+
+Actual output:
+`);
+
+console.log(alex.toString());
+console.log(bob.toString());
+console.log(dan.toString());
