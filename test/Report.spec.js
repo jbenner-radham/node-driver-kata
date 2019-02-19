@@ -35,4 +35,23 @@ describe('Report', function () {
             expect(this.report.drivers).to.eql([this.driverFixture]);
         });
     });
+
+    context('#addDrivers', function () {
+        beforeEach(function () {
+            this.driversFixture = [
+                { name: 'Jane' },
+                { name: 'John' }
+            ];
+        });
+
+        it('is a function', function () {
+            expect(Report.prototype.addDrivers).to.be.a('function');
+        });
+
+        it('adds drivers the drivers array property', function () {
+            this.report.addDrivers(this.driversFixture);
+
+            expect(this.report.drivers).to.eql(this.driversFixture);
+        });
+    });
 });
