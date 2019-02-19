@@ -101,8 +101,8 @@ describe('Driver', function () {
                 miles: 60,
                 name: this.driver.name
             }, {
-                duration: .5,
-                miles: 10,
+                duration: .55,
+                miles: 13.1,
                 name: this.driver.name
             }];
         });
@@ -123,7 +123,7 @@ describe('Driver', function () {
 
         it('updates the miles driven by the driver', function () {
             this.driver.addTrips(this.tripsFixture);
-            expect(this.driver.milesDriven).to.equal(70);
+            expect(this.driver.milesDriven).to.equal(73.1);
         });
 
         it('throws a TypeError if not passed trip objects for the driver', function () {
