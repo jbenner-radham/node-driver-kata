@@ -38,7 +38,7 @@ describe('Trip', function () {
         });
 
         it('sets the duration property', function () {
-            expect(this.trip.duration).to.equal(30);
+            expect(this.trip.duration).to.equal(.5);
         });
 
         it('sets the miles property', function () {
@@ -108,11 +108,11 @@ describe('Trip', function () {
             expect(duration).to.be.a('number');
         });
 
-        it('returns 60 for an hour long trip', () => {
+        it('returns 1 for an hour long trip', () => {
             const trip = new Trip('Trip Dan 05:55 06:55 55.5');
             const duration = trip.getDuration();
 
-            expect(duration).to.equal(60);
+            expect(duration).to.equal(1);
         });
     });
 });

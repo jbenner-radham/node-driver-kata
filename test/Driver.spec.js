@@ -51,7 +51,7 @@ describe('Driver', function () {
 
         it('sets the average speed of the driver', function () {
             const tripFixture = {
-                duration: 60,
+                duration: 1,
                 miles: 60,
                 name: this.driver.name
             };
