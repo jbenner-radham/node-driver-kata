@@ -9,7 +9,8 @@ const app = require('../lib');
 
 const cwd = process.cwd();
 const [, script] = process.argv;
-const bin = path.relative(cwd, script);
+const node = process.platform.startsWith('win') ? 'node' : '';
+const bin = `${node} ${path.relative(cwd, script)}`.trim();
 
 const cli = meow(`
     Usage
