@@ -3,20 +3,35 @@
 'use strict';
 
 const fs = require('fs');
+const path = require('path');
+const meow = require('meow');
 const app = require('../lib');
 
-const filepath = require.resolve('../example/input.txt');
+const cwd = process.cwd();
+const [, script] = process.argv;
+const bin = path.relative(cwd, script);
+
+const cli = meow(`
+    Usage
+        $ ${bin} <input file>
+
+    Options
+        --help, -h       Display this message.
+        --version, -v    Display the application version.
+`, {
+    flags: {
+        help: { alias: 'h' },
+        version: { alias: 'v' }
+    }
+});
+
+if (!cli.input.length) {
+    cli.showHelp();
+}
+
+const [inputFile] = cli.input;
+const filepath = path.resolve(cwd, inputFile);
 const input = fs.readFileSync(filepath).toString();
 const report = app(input);
-
-console.log(`
-Expected output:
-
-Alex: 42 miles @ 34 mph
-Bob: 0 miles
-Dan: 39 miles @ 47 mph
-
-Actual output:
-`);
 
 console.log(report);
