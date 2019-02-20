@@ -5,15 +5,41 @@ driver-kata
 
 A code kata exercise.
 
-~~Install~~
------------
-~~`$ yarn add driver-kata # Or alternatively: `npm install driver-kata``~~
+Install
+-------
+```sh
+$ yarn # Or alternatively: `npm install`
+```
+
+Usage
+-----
+_**NOTE**: On Windows based systems you may need to invoke the CLI script via `node bin/cli.js`._
+
+```sh
+$ bin/cli.js --help
+
+  A code kata exercise.
+
+  Usage
+      $ bin/cli.js <input file>
+
+  Options
+      --help, -h       Display this message.
+      --version, -v    Display the application version.
+```
+
+For example output invoke the command `bin/cli.js example/input.txt`.
+
 
 Testing
 -------
 ```sh
 $ yarn test # Or alternatively: `npm test`
 ```
+
+See Also
+--------
+- [Yarn](https://yarnpkg.com/)
 
 License
 -------
